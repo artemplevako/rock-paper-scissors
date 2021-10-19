@@ -5,12 +5,10 @@ function game () {
     playerScore = 0;
     computerScore = 0;
 
-    for (let round = 1; round <= 5; round++) {
-        const playerSelection = playerPlay();
-        const computerSelection = computerPlay();
-        const roundResult = playRound(playerSelection, computerSelection);
-        updateScore(roundResult);
-    }
+    const playerSelection = playerPlay();
+    const computerSelection = computerPlay();
+    const roundResult = playRound(playerSelection, computerSelection);
+    updateScore(roundResult);
 }
 
 function updateScore (roundResult) {
