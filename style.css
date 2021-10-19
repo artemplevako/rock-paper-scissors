@@ -1,0 +1,16 @@
+body {
+    background: pink;
+    margin: 0 auto;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.scores {
+    display: flex;
+}
+
+.score {
+    flex: 1;
+}
