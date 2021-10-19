@@ -49,9 +49,9 @@ function playRound (playerSelection) {
 }
 
 function computerPlay () {
-    return ['Rock', 'Paper', 'Scissors'][randomInteger(3)];
+    return ['Rock', 'Paper', 'Scissors'][random(3)];
 }
 
-function randomInteger (limit) {
+function random (limit) {
     return Math.floor(Math.random() * limit);
 }
