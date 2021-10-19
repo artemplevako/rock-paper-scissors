@@ -5,13 +5,26 @@ const GOAL_SCORE = 5;
 setup();
 
 function setup () {
-    playerScore = 0;
-    computerScore = 0;
-
     const shapes = document.querySelectorAll('.shape');
     shapes.forEach(shape => shape.addEventListener(
         'click', e => playRound(e.target.textContent.toLowerCase())
     ));
+
+    restart();
+}
+
+function restart () {
+    playerScore = 0;
+    computerScore = 0;
+
+    updateScoreNodes();
+}
+
+function updateScoreNodes () {
+    const playerScoreNode = document.querySelector('.player-score');
+    const computerScoreNode = document.querySelector('.computer-score');
+    playerScoreNode.textContent = playerScore;
+    computerScoreNode.textContent = computerScore;
 }
 
 function updateScore (roundResult) {
@@ -21,10 +34,7 @@ function updateScore (roundResult) {
         computerScore++;
     }
 
-    const playerScoreNode = document.querySelector('.player-score');
-    const computerScoreNode = document.querySelector('.computer-score')
-    playerScoreNode.textContent = playerScore;
-    computerScoreNode.textContent = computerScore;
+    updateScoreNodes();
 }
 
 function playRound (playerSelection) {
@@ -43,8 +53,10 @@ function playRound (playerSelection) {
     updateScore(roundResult);
     if (playerScore === GOAL_SCORE) {
         alert('You win!');
+        restart();
     } else if (computerScore === GOAL_SCORE) {
         alert('You lose!');
+        restart();
     }
 }
 
