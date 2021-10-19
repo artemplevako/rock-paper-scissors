@@ -1,14 +1,17 @@
 let playerScore;
 let computerScore;
+const GOAL_SCORE = 5;
 
-function game () {
+setup();
+
+function setup () {
     playerScore = 0;
     computerScore = 0;
 
-    const playerSelection = playerPlay();
-    const computerSelection = computerPlay();
-    const roundResult = playRound(playerSelection, computerSelection);
-    updateScore(roundResult);
+    const shapes = document.querySelectorAll('.shape');
+    shapes.forEach(shape => shape.addEventListener(
+        'click', e => playRound(e.target.textContent.toLowerCase())
+    ));
 }
 
 function updateScore (roundResult) {
@@ -17,33 +20,31 @@ function updateScore (roundResult) {
     } else if (roundResult === 'computer') {
         computerScore++;
     }
+
+    const playerScoreNode = document.querySelector('.player-score');
+    const computerScoreNode = document.querySelector('.computer-score')
+    playerScoreNode.textContent = playerScore;
+    computerScoreNode.textContent = computerScore;
 }
 
-function playerPlay () {
-    let selection;
-    do {
-        selection = prompt('What is your selection?') ?? '';
-    } while (!isValidSelection(selection));
-    return selection;
-}
+function playRound (playerSelection) {
+    const computerSelection = computerPlay().toLowerCase();
 
-function isValidSelection(selection) {
-    return ['rock', 'paper', 'scissors'].includes(selection.toLowerCase());
-}
-
-function playRound (playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
-
+    let roundResult;
     if (playerSelection === computerSelection) {
-        return 'tie';
-    }
-    if (playerSelection === 'rock') {
-        return computerSelection === 'paper' ? 'computer' : 'player';
+        roundResult = 'tie';
+    } else if (playerSelection === 'rock') {
+        roundResult = computerSelection === 'paper' ? 'computer' : 'player';
     } else if (playerSelection === 'paper') {
-        return computerSelection === 'rock' ? 'player' : 'computer';
+        roundResult = computerSelection === 'rock' ? 'player' : 'computer';
     } else {
-        return computerSelection === 'rock' ? 'computer' : 'player';
+        roundResult = computerSelection === 'rock' ? 'computer' : 'player';
+    }
+    updateScore(roundResult);
+    if (playerScore === GOAL_SCORE) {
+        alert('You win!');
+    } else if (computerScore === GOAL_SCORE) {
+        alert('You lose!');
     }
 }
 
