@@ -41,23 +41,11 @@ function playRound (playerSelection, computerSelection) {
         return 'tie';
     }
     if (playerSelection === 'rock') {
-        if (computerSelection === 'paper') {
-            return 'computer';
-        } else {
-            return 'player';
-        }
+        return computerSelection === 'paper' ? 'computer' : 'player';
     } else if (playerSelection === 'paper') {
-        if (computerSelection === 'rock') {
-            return 'player';
-        } else {
-            return 'computer';
-        }
+        return computerSelection === 'rock' ? 'player' : 'computer';
     } else {
-        if (computerSelection === 'rock') {
-            return 'computer';
-        } else {
-            return 'player';
-        }
+        return computerSelection === 'rock' ? 'computer' : 'player';
     }
 }
 
